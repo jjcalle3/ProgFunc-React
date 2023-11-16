@@ -1,0 +1,99 @@
+
+    
+  // Función para realizar la integración numérica a través del método de Simpson 1/3
+  def integracion(f: Double => Double, a: Double, b: Double): Double = {
+    val paramX = (a + b) / 2.0
+    val funcF = (b - a) * (f(a) + 4.0 * f(paramX) + f(b))/6
+    funcF
+  }
+  
+  // Problema 1
+  
+  def operacion(x: Double): Double = {
+    -x * x + 8 * x - 12
+  }
+   
+  val aproximacion = integracion(operacion, 3, 5)
+  println(s"El resultado de la integración es: $aproximacion")
+
+  //Problema 2
+  
+  def operacion2(x: Double): Double = {
+    3 * (x*x) 
+  } 
+  
+  val aproximacion2 = integracion(operacion2, 0, 2)
+  println(s"El resultado de la integración es: $aproximacion2")
+  
+  //Problema 3
+
+  def operacion3(x: Double): Double = {
+    (x)+(2*(x))-(x*x*x)+(5*(x*x*x*x))
+    
+    //Se corrige error de cálculo para modificar la operación acorde al resultado
+    //(x)+(2*(x))-(x*x*x)+(5*(x*x*x*x))=> Dicha operación da como resultado 4.66
+    
+  } 
+  
+  val aproximacion3 = integracion(operacion3, -1, 1)
+  println(s"El resultado de la integración es: $aproximacion3")
+ 
+  // Problema 4
+  
+  def operacion4(x: Double): Double = {
+    ((2*x)+1)/((x*x)+x)
+  } 
+  
+  val aproximacion4 = integracion(operacion4, 1, 2)
+  println(s"El resultado de la integración es: $aproximacion4")
+  
+  //Problema 5
+  
+  def operacion5(x: Double): Double = {
+    (Math.pow(Math.E,x))
+  } 
+  
+  val aproximacion5 = integracion(operacion5, 0, 1)
+  println(s"El resultado de la integración es: $aproximacion5")
+  
+  //Problema 6
+  
+  def operacion6(x: Double): Double = {
+    1 / Math.sqrt(x - 1) 
+  } 
+  
+  val aproximacion6 = integracion(operacion6, 2, 3)
+  println(s"El resultado de la integración es: $aproximacion6")
+  
+  def operacion7(x: Double): Double = {
+    1/(1+(x*x))
+  } 
+  
+  val aproximacion7 = integracion(operacion7, 0, 1)
+  println(s"El resultado de la integración es: $aproximacion7")
+
+  
+  //Cálculo de error de aproximacion
+  
+  def margenError(valorEsperado: Double,valorObtenido :Double): Double = Math.abs(valorEsperado-valorObtenido)
+  
+  val error1 = margenError(aproximacion, 7.33)
+  println(s"El Valor del Error es: $error1")
+  
+  val error2 = margenError(aproximacion2, 8)
+  println(s"El Valor del Error es: $error2")
+  
+  val error3 = margenError(aproximacion3, 3.333)
+  println(s"El Valor del Error es: $error3")
+  
+  val error4 = margenError(aproximacion4, 1.09861)
+  println(s"El Valor del Error es: $error4")
+  
+  val error5 = margenError(aproximacion5, 1.71828)
+  println(s"El Valor del Error es: $error5")
+  
+  val error6 = margenError(aproximacion6, 0.828427)
+  println(s"El Valor del Error es: $error6")
+
+  val error7 = margenError(aproximacion7, 0.785398)
+  println(s"El Valor del Error es: $error7")
