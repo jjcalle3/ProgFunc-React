@@ -1,0 +1,19 @@
+val productos: List[Tuple3[String, Int, Double]] = List(("Zapatos", 10, 50), ("Camisas", 20, 30), ("Pantalones", 15, 40), ("Gorras", 18, 15),
+  ("Calcetines", 50, 5))
+
+//Lit 1:
+val preciosCaros: List[(String, Int, Double)] = productos.filter(tupla => tupla._3 > 35)
+
+//Lit 2:
+val valorTotal: List[Double] = productos.map(ingresos => ingresos._2*ingresos._3)
+
+//Lit 3
+val ListaDetallada: List[Double] =
+  productos.flatMap(x=>List.fill(x._2)(x._3))
+
+//Lit 4
+val ingTotal: Double = productos.foldLeft(0.0){ (sum, elem)=>{sum + elem._2*elem._3}}
+
+//Lit 5
+val promVentas: Double =
+  productos.map(_._3).reduce((x,y)=>x+y)/productos.length
