@@ -1,0 +1,44 @@
+import kantan.csv._
+import kantan.csv.ops._
+import kantan.csv.generic._ 
+import java.io.File
+
+case class Ventas(
+                   tienda:String,
+                   region:String,
+                   ventas:Double,
+                   empleados:Int
+                 )
+
+
+object DataDeVentas extends  App {
+
+   val data = "data/ventasdata.csv"
+    val dataSource = new File(data)
+      .readCsv[List,Ventas](rfc.withHeader.withCellSeparator(';'))
+    //Obtener datos validos
+      val rows= dataSource.collect {
+    case Right(ventas) => ventas
+   }
+
+    //Desviacion estantar
+    val n = rows.length
+    val u = rows.map(_.ventas).sum/n
+    val sumatoria =  rows.map(x => Math.pow(x.ventas-u,2)).sum
+    val desviacion = Math.sqrt((1.0/n)*sumatoria)
+    println(desviacion)
+        //Error
+    val errorventas = desviacion/ (Math.sqrt(n))
+    println(errorventas)
+    //Indice de oscilacion
+    val max_empleados = rows.map(_.empleados).max
+    val mim_empleados = rows.map(_.empleados).min
+    val resta = max_empleados-mim_empleados
+    val indice_oscilacion = Math.abs(resta)/(Math.pow(u,2))
+    println(indice_oscilacion)
+    //Indice de divergencia
+    val sumatoriatheil = rows.map(x => x.ventas * math.log(x.ventas/u)).sum
+    val indice_divergencia = (1.0/n) * sumatoriatheil 
+    println(indice_divergencia)
+
+  }
