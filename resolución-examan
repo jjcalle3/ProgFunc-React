@@ -11,7 +11,7 @@ case class Ventas(
                  )
 
 
-object DataDeVentas extends  App {
+object examParc extends  App {
 
    val data = "data/ventasdata.csv"
     val dataSource = new File(data)
